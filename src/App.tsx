@@ -5,14 +5,12 @@ import Sales from "./pages/Sales";
 
 const App = () => {
   return (
-    <div className="container">
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Summary />} />
-          <Route path="/vendas" element={<Sales />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Summary />} />
+        <Route path="/vendas" element={<Sales />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

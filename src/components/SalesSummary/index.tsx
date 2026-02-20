@@ -1,7 +1,7 @@
 import React from "react";
 
 const SalesSummary = () => {
-  return <div>SalesSummary</div>;
+  return <div className="resumo flex mb">SalesSummary</div>;
 };
 
 export default SalesSummary;
