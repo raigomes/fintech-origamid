@@ -1,7 +1,12 @@
 import React from "react";
+import Summary from "./pages/Summary";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div className="container">
+      <Summary />
+    </div>
+  );
 };
 
 export default App;
