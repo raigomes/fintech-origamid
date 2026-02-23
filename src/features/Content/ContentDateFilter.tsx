@@ -1,12 +1,13 @@
 import React from "react";
+import Button from "../../components/Button";
 
 const ContentDateFilter = () => {
   return (
     <div className="flex">
-      <button>novembro</button>
-      <button>dezembro</button>
-      <button>janeiro</button>
-      <button>fevereiro</button>
+      <Button>novembro</Button>
+      <Button>dezembro</Button>
+      <Button>janeiro</Button>
+      <Button>fevereiro</Button>
     </div>
   );
 };
