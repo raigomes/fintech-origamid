@@ -1,6 +1,6 @@
 import React from "react";
 
-type IButton = React.HTMLAttributes<HTMLButtonElement>;
+type IButton = React.ComponentProps<"button">;
 
 const Button = (props: IButton) => {
   return (

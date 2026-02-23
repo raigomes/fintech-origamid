@@ -1,11 +1,10 @@
 import React from "react";
 
-type IInput = {
+type IInput = React.ComponentProps<"input"> & {
   label: string;
-  id: string;
 };
 
-const Input = ({ label, id }: IInput) => {
+const Input = ({ label, id, value, onChange }: IInput) => {
   return (
     <div>
       <label
@@ -27,7 +26,8 @@ const Input = ({ label, id }: IInput) => {
         id={id}
         name={id}
         type="date"
-        value="2026-02-01"
+        value={value}
+        onChange={onChange}
         style={{
           border: "none",
           fontFamily: "monospace",
