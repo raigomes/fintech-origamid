@@ -1,6 +1,6 @@
 import React from "react";
-import SalesSummary from "../components/SalesSummary";
-import SalesGraph from "../components/SalesGraph";
+import SalesSummary from "../features/SalesSummary";
+import SalesGraph from "../features/SalesGraph";
 
 const Summary = () => {
   return (

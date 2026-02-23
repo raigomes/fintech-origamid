@@ -1,5 +1,5 @@
 import React from "react";
-import SalesList from "../components/SalesList";
+import SalesList from "../features/SalesList";
 
 const Sales = () => {
   return <SalesList />;
