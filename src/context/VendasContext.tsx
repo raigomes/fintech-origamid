@@ -5,9 +5,11 @@ import { getISODate } from "../utils/date";
 interface IContext {
   dataInicio: string;
   dataFim: string;
-  setInicio: React.Dispatch<React.SetStateAction<string | null>>;
-  setFim: React.Dispatch<React.SetStateAction<string | null>>;
+  setInicio: React.Dispatch<React.SetStateAction<string>>;
+  setFim: React.Dispatch<React.SetStateAction<string>>;
   vendas: Venda[] | null;
+  loading: boolean;
+  error: string | null;
 }
 
 interface Venda {
@@ -31,24 +33,18 @@ export const useVendas = () => {
 };
 
 export const VendasProvider = ({ children }: React.PropsWithChildren) => {
-  const [inicio, setInicio] = React.useState<string | null>(null);
-  const [fim, setFim] = React.useState<string | null>(null);
-  const [vendas, setVendas] = React.useState<Venda[] | null>(null);
+  const [inicio, setInicio] = React.useState<string>(
+    getISODate(Date.now(), 14),
+  );
+  const [fim, setFim] = React.useState<string>(getISODate(Date.now()));
 
-  React.useEffect(() => {
-    setInicio(getISODate(Date.now(), 14));
-    setFim(getISODate(Date.now()));
-  }, []);
-
-  React.useEffect(() => {
-    const { data, loading, error } = useFetch<Venda[]>(
-      `https://data.origamid.dev/vendas/?inicio=${inicio}&final=${fim}`,
-    );
-
-    setVendas(data);
-  }, [inicio, fim]);
-
-  if (!inicio || !fim) return null;
+  const {
+    data: vendas,
+    loading,
+    error,
+  } = useFetch<Venda[]>(
+    `https://data.origamid.dev/vendas/?inicio=${inicio}&final=${fim}`,
+  );
 
   return (
     <VendasContext.Provider
@@ -58,6 +54,8 @@ export const VendasProvider = ({ children }: React.PropsWithChildren) => {
         setInicio,
         setFim,
         vendas,
+        loading,
+        error,
       }}
     >
       {children}
