@@ -1,6 +1,7 @@
 import React from "react";
 import SalesList from "../features/SalesList";
 import { useVendas } from "../context/VendasContext";
+import Loading from "../components/Loading";
 
 const Sales = () => {
   const { setPage, loading, error } = useVendas();
@@ -8,7 +9,7 @@ const Sales = () => {
   React.useEffect(() => setPage("Vendas"));
 
   if (error) return <p>Erro: {error}</p>;
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <Loading />;
 
   return <SalesList />;
 };

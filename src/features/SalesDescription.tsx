@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import Loading from "../components/Loading";
 
 const SalesDescription = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const SalesDescription = () => {
   );
 
   if (error) return <p>Erro: {error}</p>;
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <Loading />;
   if (!data) return null;
 
   return (
