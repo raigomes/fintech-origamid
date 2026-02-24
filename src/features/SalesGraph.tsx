@@ -17,8 +17,6 @@ const SalesGraph = () => {
 
   if (!vendas) return null;
 
-  console.log(countTotalByDateAndStatus(vendas));
-
   return (
     <div className="box">
       <LineChart
