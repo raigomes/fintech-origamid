@@ -1,12 +1,13 @@
 const millisecondsPerDay = 1000 * 60 * 60 * 24;
 
-export function getISODate(
-  dateInMiliseconds: number,
-  subtractDays: number = 0,
-) {
-  const newDateInMilliseconds =
-    dateInMiliseconds - subtractDays * millisecondsPerDay;
-  return new Date(newDateInMilliseconds).toISOString().split("T")[0];
+export function getISODate(date: Date, subtractDays: number = 0) {
+  date.setDate(date.getDate() - subtractDays);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return [year, month, day].join("-");
 }
 
 function getFullMonth(date: Date) {
@@ -14,8 +15,7 @@ function getFullMonth(date: Date) {
   return nomeMes;
 }
 
-export function getLastFourMonths(isoDate: string) {
-  const date = new Date(isoDate);
+export function getLastFourMonths(date: Date) {
   const month = date.getMonth();
   const array = [];
 
@@ -32,12 +32,11 @@ export function getLastFourMonths(isoDate: string) {
 }
 
 export function getFirstAndLastDayOfMonth(date: Date) {
-  const firstDay = getISODate(
-    new Date(date.getFullYear(), date.getMonth(), 1).getTime(),
-  );
+  const firstDay = getISODate(new Date(date.getFullYear(), date.getMonth(), 1));
   const lastDay = getISODate(
-    new Date(date.getFullYear(), date.getMonth() + 1, 0).getTime(),
+    new Date(date.getFullYear(), date.getMonth() + 1, 0),
   );
 
+  console.log(firstDay, lastDay);
   return { firstDay, lastDay };
 }

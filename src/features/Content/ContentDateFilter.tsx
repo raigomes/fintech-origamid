@@ -5,7 +5,7 @@ import { getFirstAndLastDayOfMonth, getLastFourMonths } from "../../utils/date";
 
 const ContentDateFilter = () => {
   const { setInicio, setFim } = useVendas();
-  const today = new Date().toISOString();
+  const today = new Date();
   const months = getLastFourMonths(today);
 
   function handleClick(date: Date) {

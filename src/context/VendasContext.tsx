@@ -44,9 +44,9 @@ export const useVendas = () => {
 
 export const VendasProvider = ({ children }: React.PropsWithChildren) => {
   const [inicio, setInicio] = React.useState<string>(
-    getISODate(Date.now(), 14),
+    getISODate(new Date(), 14),
   );
-  const [fim, setFim] = React.useState<string>(getISODate(Date.now()));
+  const [fim, setFim] = React.useState<string>(getISODate(new Date()));
   const [page, setPage] = React.useState<PageTitle>("Resumo");
 
   const {
