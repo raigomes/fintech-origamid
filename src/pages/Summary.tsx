@@ -4,7 +4,9 @@ import SalesGraph from "../features/SalesGraph";
 import { useVendas } from "../context/VendasContext";
 
 const Summary = () => {
-  const { loading, error } = useVendas();
+  const { setPage, loading, error } = useVendas();
+
+  React.useEffect(() => setPage("Resumo"));
 
   if (error) return <p>Erro: {error}</p>;
   if (loading) return <p>Carregando...</p>;

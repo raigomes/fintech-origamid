@@ -2,11 +2,21 @@ import React, { useContext } from "react";
 import useFetch from "../hooks/useFetch";
 import { getISODate } from "../utils/date";
 
+type PageTitle =
+  | "Resumo"
+  | "Vendas"
+  | "Webhooks"
+  | "Configurações"
+  | "Contato"
+  | "Sair";
+
 interface IContext {
   dataInicio: string;
   dataFim: string;
   setInicio: React.Dispatch<React.SetStateAction<string>>;
   setFim: React.Dispatch<React.SetStateAction<string>>;
+  page: PageTitle;
+  setPage: React.Dispatch<React.SetStateAction<PageTitle>>;
   vendas: Venda[] | null;
   loading: boolean;
   error: string | null;
@@ -37,6 +47,7 @@ export const VendasProvider = ({ children }: React.PropsWithChildren) => {
     getISODate(Date.now(), 14),
   );
   const [fim, setFim] = React.useState<string>(getISODate(Date.now()));
+  const [page, setPage] = React.useState<PageTitle>("Resumo");
 
   const {
     data: vendas,
@@ -53,6 +64,8 @@ export const VendasProvider = ({ children }: React.PropsWithChildren) => {
         dataFim: fim,
         setInicio,
         setFim,
+        page,
+        setPage,
         vendas,
         loading,
         error,
