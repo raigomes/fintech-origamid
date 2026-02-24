@@ -20,6 +20,12 @@ declare global {
     parcelas: number | null;
     data: string;
   }
+
+  type TotalByStatus = { [key in StatusVenda]: number };
+
+  type ICountVenda = TotalByStatus & {
+    date: string;
+  };
 }
 
 export {};

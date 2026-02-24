@@ -1,4 +1,6 @@
-export function countTotalVendas(status: StatusVenda[], vendas: Venda[]) {
+import { getDayAndMonth } from "./date";
+
+export function countTotalByStatus(status: StatusVenda[], vendas: Venda[]) {
   let total = 0;
 
   status.forEach((status) => {
@@ -8,4 +10,25 @@ export function countTotalVendas(status: StatusVenda[], vendas: Venda[]) {
   });
 
   return total;
+}
+
+type AggregatedByDate = Record<string, ICountVenda>;
+
+export function countTotalByDateAndStatus(vendas: Venda[]) {
+  const aggregated = vendas.reduce<AggregatedByDate>((acc, venda) => {
+    const dateKey = getDayAndMonth(new Date(venda.data));
+
+    acc[dateKey] ??= {
+      date: dateKey,
+      pago: 0,
+      processando: 0,
+      falha: 0,
+    };
+
+    acc[dateKey][venda.status] += venda.preco;
+
+    return acc;
+  }, {});
+
+  return Object.values(aggregated);
 }

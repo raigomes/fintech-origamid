@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "./Box";
 import { useVendas } from "../../context/VendasContext";
-import { countTotalVendas } from "../../utils/vendas";
+import { countTotalByStatus } from "../../utils/vendas";
 
 const SalesSummary = () => {
   const [totalVendas, setTotalVendas] = React.useState(0);
@@ -11,9 +11,9 @@ const SalesSummary = () => {
 
   React.useEffect(() => {
     if (vendas) {
-      setTotalVendas(countTotalVendas(["pago", "processando"], vendas));
-      setTotalRecebido(countTotalVendas(["pago"], vendas));
-      setTotalProcessando(countTotalVendas(["processando"], vendas));
+      setTotalVendas(countTotalByStatus(["pago", "processando"], vendas));
+      setTotalRecebido(countTotalByStatus(["pago"], vendas));
+      setTotalProcessando(countTotalByStatus(["processando"], vendas));
     }
   }, [vendas]);
 
