@@ -2,14 +2,6 @@ import React, { useContext } from "react";
 import useFetch from "../hooks/useFetch";
 import { getISODate } from "../utils/date";
 
-type PageTitle =
-  | "Resumo"
-  | "Vendas"
-  | "Webhooks"
-  | "Configurações"
-  | "Contato"
-  | "Sair";
-
 interface IContext {
   dataInicio: string;
   dataFim: string;
@@ -20,16 +12,6 @@ interface IContext {
   vendas: Venda[] | null;
   loading: boolean;
   error: string | null;
-}
-
-interface Venda {
-  id: string;
-  nome: string;
-  preco: number;
-  status: "pago" | "processando" | "falha";
-  pagamento: "pix" | "cartao" | "boleto";
-  parcelas: number | null;
-  data: string;
 }
 
 const VendasContext = React.createContext<IContext | null>(null);
