@@ -7,12 +7,16 @@ declare global {
     | "Contato"
     | "Sair";
 
+  type StatusVenda = "pago" | "processando" | "falha";
+
+  type Payment = "pix" | "cartao" | "boleto";
+
   interface Venda {
     id: string;
     nome: string;
     preco: number;
-    status: "pago" | "processando" | "falha";
-    pagamento: "pix" | "cartao" | "boleto";
+    status: StatusVenda;
+    pagamento: Payment;
     parcelas: number | null;
     data: string;
   }
