@@ -1,13 +1,30 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const SalesDescription = () => {
+  const { id } = useParams();
+  const { data, loading, error } = useFetch<Venda>(
+    `https://data.origamid.dev/vendas/${id}`,
+  );
+
+  if (error) return <p>Erro: {error}</p>;
+  if (loading) return <p>Carregando...</p>;
+  if (!data) return null;
+
   return (
     <div>
-      <div className="box mb">ID: 01H3YYPNGC8BCXME7Q4KZ0NV20</div>
-      <div className="box mb">Nome: Carolina</div>
-      <div className="box mb">Preço: R$&nbsp;932,00</div>
-      <div className="box mb">Status: pago</div>
-      <div className="box mb">Pagamento: cartao</div>
+      <div className="box mb">ID: {data.id}</div>
+      <div className="box mb">Nome: {data.nome}</div>
+      <div className="box mb">
+        Preço:{" "}
+        {data.preco.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </div>
+      <div className="box mb">Status: {data.status}</div>
+      <div className="box mb">Pagamento: {data.pagamento}</div>
     </div>
   );
 };
