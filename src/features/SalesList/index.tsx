@@ -1,17 +1,20 @@
 import React from "react";
 import SalesListItem from "./SalesListItem";
+import { useVendas } from "../../context/VendasContext";
 
 const SalesList = () => {
-  const array = Array.from({ length: 20 });
+  const { vendas } = useVendas();
+
+  if (!vendas) return null;
 
   return (
     <ul>
-      {array.map((item, index) => (
+      {vendas.map((item, index) => (
         <li key={index}>
           <SalesListItem
-            id="01H3YYPNGC8BCXME7Q4KZ0NV20"
-            clientName="Carolina"
-            price={932}
+            id={item.id}
+            clientName={item.nome}
+            price={item.preco}
           />
         </li>
       ))}
